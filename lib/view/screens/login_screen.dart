@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import 'package:posts_app/view/screens/home_screen.dart';
 import 'package:posts_app/view/widgets/my_Textfield.dart';
 import 'package:posts_app/view/widgets/my_button.dart';
 import 'package:posts_app/view/widgets/squar_tile.dart';
-
 import '../../model/post_model.dart';
 import '../../service/service.dart';
 
@@ -14,11 +11,12 @@ class LoginScreen extends StatelessWidget {
   static final nameRoute = '/loginScreen';
   var userController = TextEditingController();
   var passwordController = TextEditingController();
+
   List<PostsModel> _data = [];
 
-  Future<List<PostsModel>?> getData ()async{
+  Future<List<PostsModel>?> getData() async {
     var respons = await RemoteService.fetchPosts();
-    if(respons != null){
+    if (respons != null) {
       _data = respons;
       print(_data);
       return _data;
@@ -98,15 +96,15 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 // Sign in Button
-                  MyButton(
-                    onTap: ()async {
-                      await getData();
-                      print("lenhtg ${_data[4].title}" );
-                      Get.toNamed(HomeScreen.nameRoute , arguments: _data);
-                      print('click sign in button');
-                    },
-                    text: 'Sign In',
-                  ),
+                MyButton(
+                  onTap: () {
+                    // await getData();
+                    // print("lenhtg ${_data[4].title}" );
+                    Get.toNamed(HomeScreen.nameRoute,);
+                    print('click sign in button');
+                  },
+                  text: 'Sign In',
+                ),
 
                 const SizedBox(
                   height: 10,

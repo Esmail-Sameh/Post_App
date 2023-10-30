@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:posts_app/view/screens/details_screen.dart';
 import 'package:posts_app/view/screens/home_screen.dart';
 import 'package:posts_app/view/screens/login_screen.dart';
 void main ( ){
@@ -17,9 +18,12 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: LoginScreen.nameRoute, page: () => LoginScreen(),),
         GetPage(name: HomeScreen.nameRoute, page: () => HomeScreen(),),
+        GetPage(name: DetailsScreen.nameRoute, page: () => DetailsScreen(),),
       ],
       defaultTransition: Transition.rightToLeftWithFade,
-
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey[300],
+      ),
 
     ) ;
   }

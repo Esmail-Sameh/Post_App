@@ -4,7 +4,9 @@
 
 import 'dart:convert';
 
-List<PostsModel> postFromJson(String str) => List<PostsModel>.from(json.decode(str).map((x) => PostsModel.fromJson(x)));
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
+RxList<PostsModel> postFromJson(String str) => RxList<PostsModel>.from(json.decode(str).map((x) => PostsModel.fromJson(x)));
 
 String postToJson(List<PostsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

@@ -1,28 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:posts_app/model/post_model.dart';
-import 'package:posts_app/service/service.dart';
+import 'package:get/get.dart';
+import 'package:posts_app/controller/post_controller.dart';
 import 'package:posts_app/view/widgets/my_card.dart';
 
 class HomeScreen extends StatelessWidget {
   static final nameRoute = '/homeScreen';
 
+  final PostController _controller = Get.put(PostController(), permanent: true);
   @override
   Widget build(BuildContext context) {
-    var data = ModalRoute.of(context)!.settings.arguments as List<PostsModel>;
+    // var data = ModalRoute.of(context)!.settings.arguments as List<PostsModel>;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
-        body: ListView.builder(
-          itemBuilder:
-              (context, index) =>
+        body:Obx((){
+          if(_controller.isLoding.value){
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 10,),
+                  Text('Loding...'),
+                ],
+              ),
+            );
+          }else{
+            return ListView.builder(
+              itemBuilder: (context, index) =>
                   MyCard(
-                    id: data[index].id,
-                    userId: data[index].userId ,
-                    title: data[index].title,
-                    body: data[index].body,
+                    id: _controller.postsList.value[index].id,
+                    userId:  _controller.postsList.value[index].userId,
+                    title:  _controller.postsList.value[index].title,
+                    body:  _controller.postsList.value[index].body,
                   ),
-          itemCount: data.length,
-        ),
+              itemCount: _controller.postsList.value.length,
+            );
+          }
+        }),
+
+
+
       ),
     );
   }
